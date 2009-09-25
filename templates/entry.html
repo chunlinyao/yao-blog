@@ -1,0 +1,7 @@
+{% extends "sidebar.html" %}
+{% import 'modules.html' as modules %}
+{% block title %}{{ entry.title|e }} - {{ settings["blog_title"] |e }}{% endblock %}
+
+{% block content %}
+  {{ modules.entry(entry, show_comments = True) }}
+{% endblock %}

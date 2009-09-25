@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  {% set date_format = "%Y-%m-%dT%H:%M:%SZ" %}
+  <title>{{ settings["blog_title"] |e }}</title>
+  <updated>{{ last_updated.strftime(date_format) }}</updated>
+  <id>http://{{ web.ctx.host }}/</id>
+  <link rel="alternate" href="http://{{ web.ctx.host }}/" title="{{ settings["blog_title"] | e }}" type="text/html"/>
+  <link rel="self" href="{{ web.ctx.path }}" title="{{ settings["blog_title"]|e }}" type="application/atom+xml"/>
+  <author><name>{{ settings["blog_title"] | e }}</name></author>
+  {% for entry in entries %}
+    <entry>
+      <id>http://{{ web.ctx.host }}/entry/{{ entry.slug }}</id>
+      <title type="text">{{ entry.title | e }}</title>
+      <link href="http://{{ web.ctx.host }}/entry/{{ entry.slug }}" rel="alternate" type="text/html"/>
+      <updated>{{ entry.updated.strftime(date_format) }}</updated>
+      <published>{{ entry.published.strftime(date_format) }}</published>
+      <content type="xhtml" xml:base="http://{{ web.ctx.host }}/">
+	<div xmlns="http://www.w3.org/1999/xhtml">{{ entry.body }}</div>
+      </content>
+    </entry>
+  {% endfor %}
+</feed>

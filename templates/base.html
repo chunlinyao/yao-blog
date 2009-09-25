@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+    <title>{% block title %}{{ settings["blog_title"] | e }}{% endblock  %}</title>
+    <link rel="stylesheet" href="/static/blog.css" type="text/css"/>
+    <link rel="alternate" href="http://feeds.feedburner.com/yao-blog" type="application/atom+xml" title="{{ settings["blog_title"] | e }}"/>
+    <script src="http://disqus.com/forums/yao-blog/embed.js" type="text/javascript" language="javascript" ></script>
+    {% block head %}{% endblock  %}
+  </head>
+  <body>
+    <div id="body">
+      <div id="header">
+	      <div class="menu">
+		      <span><a href="http://feeds.feedburner.com/yao-blog">Feed</a></span>
+		      <span><a href="/archive">Archive</a></span>
+		      <span><a href="/about">About Me</a></span>
+	      </div>
+	<div class="title"><a href="/">Yao's Blog</a></div>
+      </div>
+      <div id="content">{% block body %}{% endblock  %}</div>
+      <div id="footer">
+	&copy;{{ datetime.datetime.utcnow().year }} Yao Chunlin - <a href="/about">About me</a> - <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons license</a>
+	{% if users.get_current_user() %} - <a href="{{ users.create_logout_url(web.ctx.path) }}">Sign out</a>{% endif %}
+      </div>
+    </div>
+    {% block bottom %}{% endblock %}
+    {% if not settings.debug %}
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script>
+<script type="text/javascript">
+try {
+var pageTracker = _gat._getTracker("UA-1999219-7");
+pageTracker._trackPageview();
+} catch(err) {}</script>
+    {% endif %}
+  </body>
+</html>

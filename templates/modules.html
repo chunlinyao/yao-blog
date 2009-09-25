@@ -1,0 +1,35 @@
+{% macro entry(entry,show_comments=False) -%}
+<div class="entry">
+  <h1><a href="/entry/{{ entry.slug }}">{{ entry.title | e }}</a></h1>
+  <div class="date">By Yao Chunlin &middot; {{ locale.format_date(entry.published, full_format=True, shorter=True) }}</div>
+  <div class="body">{{ entry.body }}</div>
+  {% if not show_comments %}
+    <div class="footer">
+      <a href="/entry/{{ entry.slug }}#disqus_thread">Comments</a>
+    </div>
+  {% endif %}
+  {% if users.get_current_user() and users.is_current_user_admin() %}
+    <div class="footer">
+      <a href="/compose?key={{ str(entry.key()) }}">Edit this post</a>
+    </div>
+  {% endif %}
+  {% if show_comments %}
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+	    //<![CDATA[
+		(function() {
+		    var links = document.getElementsByTagName('a');
+		    var query = '?';
+		    for (var i = 0; i < links.length; i++) {
+			if (links[i].href.indexOf('#disqus_thread') >= 0) {
+			    query += 'url' + i + '=' + encodeURIComponent(links[i].href) + '&';
+			}
+		    }
+		    document.write('<' + 'script type="text/javascript" src="http://disqus.com/forums/yao-blog/get_num_replies.js' + query + '"></' + 'script>');
+	    })();
+	//]]>
+    </script>
+  {% endif %}
+</div>
+{%- endmacro %}
+

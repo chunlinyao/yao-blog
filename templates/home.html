@@ -1,0 +1,9 @@
+{% extends "sidebar.html" %}
+{% import 'modules.html' as modules %}
+
+{% block content %}
+  {% for entry in entries %}
+    {{ modules.entry(entry) }}
+  {% endfor %}
+  <div><a href="/archive">Archive</a></div>
+{% endblock %}
