@@ -87,7 +87,11 @@ a:hover {
   padding: 8px;
   padding-left: 15px;
   padding-right: 15px;
-  line-height: 0;
+  /*line-height: 0;*/
+}
+
+#header div.title {
+  font-size: 3em;
 }
 
 #header .menu {

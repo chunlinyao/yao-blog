@@ -28,7 +28,7 @@ class render_jinja:
 try:
     mydata
 except NameError:
-    logging.error("damn")
+    logging.error("create jinja2 cache map")
     mydata = {}
 import base64
 def get_data_by_name(name):
@@ -44,7 +44,7 @@ class PythonLoader(FileSystemLoader):
         #try for a variable cache
         code = get_data_by_name(name)
         if code is not None:
-            logging.info("ultrafast memcache")
+            logging.info("find in hashmap")
         else:
             logging.info("slow memcache")
             code = memcache.get(name)
@@ -56,7 +56,7 @@ class PythonLoader(FileSystemLoader):
                 memcache.set(name,code)
                 logging.info(name)
             else:
-                logging.info("yeh memcache")
+                logging.info("hit memcache")
             code = compile(code, name, 'exec')
             mydata[base64.b64encode(name)] = code
         return environment.template_class.from_code(environment, code,globals)

@@ -37,7 +37,16 @@ def exists_entry(slug):
     q = db.Query(Entry).filter('slug =', slug).get()
     return q is not None
 
-def save_entry(entry):
+def update_entry(slug, i):
+    entry = entry_by_slug(slug)
+    if entry:
+        entry.title = i.title
+        entry.markdown = i.markdown
+        entry.body = markdown(i.markdown)
+        entry.put()
+
+
+def insert_entry(entry):
     slug = slugify(entry.title)
     while exists_entry(slug):
         slug = versionate(slug)        
@@ -45,9 +54,10 @@ def save_entry(entry):
     db.put(Entry(
             author=users.get_current_user(),
             title=entry.title,
-            body=markdown(entry.text),
+            body=markdown(entry.markdown),
             slug=slug,
-            markdown=entry.text
+            markdown=entry.markdown
             ))
+    return slug
             
 

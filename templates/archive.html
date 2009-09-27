@@ -26,7 +26,7 @@
     {% for entry in entries %}
       <li>
 	<div class="title"><a href="/entry/{{ entry.slug }}">{{ entry.title |e }}</a></div>
-	<div class="date">{{ locale.format_date(entry.published, full_format=True, shorter=True) }}</div>
+	<div class="date">{{entry.published.strftime("%a %Y-%m-%d") }}</div>
       </li>
     {% endfor %}
   </ul>

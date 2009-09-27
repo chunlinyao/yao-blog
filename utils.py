@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-import re
+import re,unicodedata
 
 def markdown(text):
     from markdown import markdown

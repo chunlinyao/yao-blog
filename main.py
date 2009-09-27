@@ -2,9 +2,7 @@
 #coding:utf-8
 
 import sys
-sys.path.insert(0, 'lib/webpy.zip')
-sys.path.insert(0, 'lib/markdown.zip')
-sys.path.insert(0, 'lib/jinja2.zip')
+sys.path.insert(0, 'lib/lib.zip')
 
 import web, os
 import data
@@ -18,7 +16,9 @@ urls = (
   '/archive', 'Archive',
   '/about', 'About',
   '/feed', 'Feed',
-  '/compose', 'Post'
+  '/atom', 'Feed',
+  '/compose', 'Post',
+  '/clear-cache', 'ClearCache',
 )
 
 settings = {
@@ -40,39 +40,24 @@ class Home:
 class Post:
     @requires_admin
     def GET(self):
-        key = web.input(key=None)
-        entry = Entry.get(key) if key else None
+        i = web.input(key=None)
+         
+        import logging
+        entry = data.entry_by_slug(i.key) if i.key else None
         return render.compose(entry=entry,**globals())
 
     @requires_admin
     def POST(self):
-        key = web.input(key=None)
-        if key:
-            entry = Entry.get(key)
-            entry.title = self.get_argument("title")
-            entry.body = self.get_argument("markdown")
-            entry.markdown = markdown.markdown(self.get_argument("markdown"))
+        i = web.input(key=None,title=None,markdown=None)
+        slug = i.key
+        if slug:
+            if data.exists_entry(i.key):
+                data.update_entry(i.key, i)
+            else:
+                return web.seeother("/")
         else:
-            title = self.get_argument("title")
-            slug = unicodedata.normalize("NFKD", title).encode(
-                "ascii", "ignore")
-            slug = re.sub(r"[^\w]+", " ", slug)
-            slug = "-".join(slug.lower().strip().split())
-            if not slug: slug = "entry"
-            while True:
-                existing = db.Query(Entry).filter("slug =", slug).get()
-                if not existing or str(existing.key()) == key:
-                    break
-                slug += "-2"
-            entry = Entry(
-                author=self.current_user,
-                title=title,
-                slug=slug,
-                body=self.get_argument("markdown"),
-                markdown=markdown.markdown(self.get_argument("markdown")),
-            )
-        entry.put()
-        return web.seeother("/entry/" + entry.slug)
+            slug = data.insert_entry(i)
+        return web.seeother("/entry/" + slug)
 
 
 class Entry:
@@ -100,7 +85,12 @@ class Feed:
 class About:
     def GET(self):
         return render.about(**globals())
- 
+
+class ClearCache:
+    def GET(self):
+        from google.appengine.api import memcache
+        memcache.flush_all()
+        return "Memcache flushed." 
 
 app = web.application(urls, globals())
 
