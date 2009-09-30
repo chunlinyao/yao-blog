@@ -46,6 +46,7 @@ def update_entry(slug, i):
         entry.markdown = i.markdown
         entry.body = markdown(i.markdown)
         entry.put()
+    return entry
 
 
 def insert_entry(entry):
@@ -53,13 +54,14 @@ def insert_entry(entry):
     while exists_entry(slug):
         slug = versionate(slug)        
 
-    db.put(Entry(
+    entry = Entry(
             author=users.get_current_user(),
             title=entry.title,
             body=markdown(entry.markdown),
             slug=slug,
             markdown=entry.markdown
-            ))
-    return slug
+            )
+    entry.put()
+    return entry
             
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-
 import sys
+
 sys.path.insert(0, 'lib/lib.zip')
 
 import web, os
@@ -49,15 +49,14 @@ class Post:
     @requires_admin
     def POST(self):
         i = web.input(key=None,title=None,markdown=None)
-        slug = i.key
-        if slug:
+        if i.key:
             if data.exists_entry(i.key):
-                data.update_entry(i.key, i)
+                entry = data.update_entry(i.key, i)
             else:
                 return web.seeother("/")
         else:
-            slug = data.insert_entry(i)
-        return web.seeother("/entry/" + slug)
+            entry = data.insert_entry(i)
+        return web.seeother("/entry/" + entry.slugurl())
 
 
 class Entry:
