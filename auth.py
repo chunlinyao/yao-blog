@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import web
 from google.appengine.api import users
 
@@ -7,7 +8,7 @@ def requires_admin(method):
         user = users.get_current_user()
         if not user:
             if web.ctx.method == "GET":
-                raise web.seeother(users.create_login_url(web.ctx.path))
+                raise web.seeother(users.create_login_url(web.ctx.fullpath))
             raise web.forbidden()
         elif not (users.is_current_user_admin()):
             raise web.forbidden()

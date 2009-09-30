@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-#coding:utf-8
+# -*- coding: utf-8 -*-
 
 import sys
 sys.path.insert(0, 'lib/lib.zip')
 
-import web, os, urllib
+import web, os
 import data
 from auth import requires_admin
 import datetime,locale

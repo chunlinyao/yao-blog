@@ -1,8 +1,8 @@
-#coding: utf-8
+# -*- coding: utf-8 -*-
 
 from google.appengine.api import users
 from google.appengine.ext import db
-
+import urllib
 from utils import slugify, versionate, markdown
 
 class Entry(db.Model):
@@ -14,7 +14,9 @@ class Entry(db.Model):
     markdown = db.TextProperty(required=True)
     published = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
-
+    
+    def slugurl(self):
+        return urllib.quote(self.slug.encode('utf-8'), safe='') 	
 
 def all_entries():
     return Entry.all()

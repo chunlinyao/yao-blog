@@ -22,7 +22,12 @@
       <div id="content">{% block body %}{% endblock  %}</div>
       <div id="footer">
 	&copy;{{ datetime.datetime.utcnow().year }} Yao Chunlin - <a href="/about">About me</a> - <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons license</a>
-	{% if users.get_current_user() %} - <a href="{{ users.create_logout_url(web.ctx.path) }}">Sign out</a>{% endif %}
+	{% if users.get_current_user() %}
+	     - <a href="/compose">Compose</a>
+	     - <a href="{{ users.create_logout_url(web.ctx.fullpath.encode('utf-8')) }}">Sign out</a>
+    {% else %}
+    	 - <a href="{{ users.create_login_url(web.ctx.fullpath.encode('utf-8')) }}">Sign in</a>
+	{% endif %}
       </div>
     </div>
     {% block bottom %}{% endblock %}

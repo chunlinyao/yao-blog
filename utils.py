@@ -3,10 +3,9 @@
 
 import os
 import re,unicodedata
-
+from markdown import markdown as md
 def markdown(text):
-    from markdown import markdown
-    return markdown(text)
+    return md(text)
 
 def timestamp(d=None):
     '''returns a string representing a given datetime up to the microsecond.

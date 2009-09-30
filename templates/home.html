@@ -1,11 +1,12 @@
 {% extends "sidebar.html" %}
-{% import 'modules.html' as modules with context %}
+{% import "modules.html" as modules with context %}
 
 {% block content %}
   {% for entry in entries %}
     {{ modules.entry(entry) }}
   {% endfor %}
   <div><a href="/archive">Archive</a></div>
+      {% if not settings.debug %}
       <script type="text/javascript">
 	    //<![CDATA[
 		(function() {
@@ -20,4 +21,5 @@
 	    })();
 	//]]>
     </script>
+    {% endif %}
 {% endblock %}
