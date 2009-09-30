@@ -1,16 +1,16 @@
 {% macro entry(entry,show_comments=False) -%}
 <div class="entry">
-  <h1><a href="/entry/{{ entry.slug }}">{{ entry.title | e }}</a></h1>
+  <h1><a href="/entry/{{ urllib.quote(entry.slug, safe="") }}">{{ entry.title | e }}</a></h1>
   <div class="date">By Yao Chunlin &middot; {{ entry.published.strftime("%a %Y-%m-%d") }}</div>
   <div class="body">{{ entry.body }}</div>
   {% if not show_comments %}
     <div class="footer">
-      <a href="/entry/{{ entry.slug }}#disqus_thread">Comments</a>
+      <a href="/entry/{{ urllib.quote(entry.slug, safe="") }}#disqus_thread">Comments</a>
     </div>
   {% endif %}
   {% if users.get_current_user() and users.is_current_user_admin() %}
     <div class="footer">
-      <a href="/compose?key={{ entry.slug }}">Edit this post</a>
+      <a href="/compose?key={{ urllib.quote(entry.slug, safe="") }}">Edit this post</a>
     </div>
   {% endif %}
   {% if show_comments %}

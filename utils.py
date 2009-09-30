@@ -18,10 +18,10 @@ def timestamp(d=None):
 
 def slugify(s):
     """Convert some string to a url-friendly name."""
-    slug = unicodedata.normalize("NFKD", s).encode(
-        "ascii", "ignore")
-    slug = re.sub(r"[^\w]+", " ", slug)
-    slug = "-".join(slug.lower().strip().split())
+    #islug = unicodedata.normalize("NFKD", s).encode(
+    #    "ascii", "ignore")
+    #slug = re.sub(u"[^\w]+", u" ", s)
+    slug = u"-".join(s.lower().strip().split())
     if not slug: slug = "entry"
     return slug
 

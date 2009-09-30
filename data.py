@@ -31,10 +31,10 @@ def latest_entries(limit=10):
 
 def entry_by_slug(slug):
     '''We're assuming all entries contain a unique slug.'''
-    return db.Query(Entry).filter('slug =', slug).get()
+    return db.Query(Entry).filter(u'slug =', slug).get()
 
 def exists_entry(slug):
-    q = db.Query(Entry).filter('slug =', slug).get()
+    q = db.Query(Entry).filter(u'slug =', slug).get()
     return q is not None
 
 def update_entry(slug, i):

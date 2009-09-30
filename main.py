@@ -4,7 +4,7 @@
 import sys
 sys.path.insert(0, 'lib/lib.zip')
 
-import web, os
+import web, os, urllib
 import data
 from auth import requires_admin
 import datetime,locale
