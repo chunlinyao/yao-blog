@@ -19,6 +19,7 @@ urls = (
   '/atom', 'Feed',
   '/compose', 'Post',
   '/clear-cache', 'ClearCache',
+  '/tag/(.*)', 'Tag',
 )
 
 settings = {
@@ -32,6 +33,10 @@ else:
 
 render = render_jinja('templates')
 
+
+def tags_list():
+    return data.Tag.taglist()
+    
 class Home:
     def GET(self):
         entries = data.latest_entries()
@@ -48,7 +53,7 @@ class Post:
 
     @requires_admin
     def POST(self):
-        i = web.input(key=None,title=None,markdown=None)
+        i = web.input(key=None,title=None,markdown=None,tag_str=None)
         if i.key:
             if data.exists_entry(i.key):
                 entry = data.update_entry(i.key, i)
@@ -90,6 +95,11 @@ class ClearCache:
         from google.appengine.api import memcache
         memcache.flush_all()
         return "Memcache flushed." 
+
+class Tag:
+    def GET(self, tag):
+        entries = data.Tag.entries_by_tag(tag)
+        return render.archive(entries=entries,**globals())
 
 app = web.application(urls, globals())
 

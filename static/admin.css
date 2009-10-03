@@ -33,7 +33,8 @@
 }
 
 .compose .title,
-.compose .markdown {
+.compose .markdown,
+.compose .tags {
   width: 100%;
 }
 

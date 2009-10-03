@@ -4,6 +4,12 @@
   {% block sidebar %}
     <div id="sidebar">
       <div class="section">
+          <ul>
+              <p>标签</p>
+              {% for t in tags_list() %}
+                <li><a href="/tag/{{t.tagurl()}}">{{t.tag |e}}({{t.entrycount}})</a></li>
+              {% endfor %}          
+          </ul>
       </div>
     </div>
   {% endblock %}

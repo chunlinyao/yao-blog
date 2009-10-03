@@ -3,6 +3,11 @@
   <h1><a href="/entry/{{ entry.slugurl() }}">{{ entry.title | e }}</a></h1>
   <div class="date">By Yao Chunlin &middot; {{ entry.published.strftime("%a %Y-%m-%d") }}</div>
   <div class="body">{{ entry.body }}</div>
+  <div class="tags">
+  {% for t in entry.tagurls %}
+    <a href="/tag/{{ t.url }}">{{t| e}}</a>
+  {% endfor %}
+  </div>
   {% if not show_comments %}
     <div class="footer">
       <a href="/entry/{{ entry.slugurl() }}#disqus_thread">Comments</a>

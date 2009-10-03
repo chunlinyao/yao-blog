@@ -8,6 +8,7 @@
   <form action="{{ web.ctx.path }}" method="post" class="compose">
     <div style="margin-bottom:5px"><input name="title" type="text" class="title" value="{{ entry.title |e if entry else "" }}"/></div>
     <div style="margin-bottom:5px"><textarea name="markdown" rows="30" cols="40" class="markdown">{{ entry.markdown |e if entry else "" }}</textarea></div>
+    <div style="margin-bottom:5px"><input name="tag_str" type="text" class="tags" value="{{ entry.tag_str |e if entry else "" }}"/></div>
     <div>
       <div style="float:right"><a href="http://daringfireball.net/projects/markdown/syntax">Syntax documentation</a></div>
       <input type="submit" value="{{ "Save changes" if entry else "Publish post" }}" class="submit"/>
