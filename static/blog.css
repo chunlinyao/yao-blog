@@ -159,6 +159,17 @@ a:hover {
   margin-top: 3px;
 }
 
+.entry .date .tags{
+  float: right;
+}
+
+.entry .date .tags a{
+  border-left: 1em solid rgb(135, 170, 135);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  font-size: 0.9em;
+}
+
 .entry .body {
   margin-top: 1em;
 }

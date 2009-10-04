@@ -5,7 +5,7 @@
     <div id="sidebar">
       <div class="section">
           <ul>
-              <p></p>
+              <p>标签</p>
               {% for t in tags_list() %}
                 <li><a href="/tag/{{t.tagurl()}}">{{t.tag |e}}({{t.entrycount}})</a></li>
               {% endfor %}          

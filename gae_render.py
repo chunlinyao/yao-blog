@@ -51,7 +51,7 @@ class PythonLoader(FileSystemLoader):
             if code is None:
                 logging.info("oops no memcache!!")
                 source, filename, uptodate = self.get_source(environment, name)
-                template = file(filename).read().decode('ascii').decode('utf-8')
+                template = file(filename).read().decode('utf-8')
                 code = environment.compile(template, raw=True)
                 memcache.set(name,code)
                 logging.info(name)

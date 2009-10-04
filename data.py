@@ -14,7 +14,7 @@ class Entry(db.Model):
     markdown = db.TextProperty(required=True)
     published = db.DateTimeProperty(auto_now_add=True)
     updated = db.DateTimeProperty(auto_now=True)
-    tag_str = db.StringProperty(required=False) 
+    tag_str = db.StringProperty(required=False,default="") 
     tags = db.ListProperty(db.Category)
 
     @property
