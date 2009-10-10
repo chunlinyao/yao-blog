@@ -12,6 +12,8 @@ from google.appengine.api import users
 
 urls = (
   '/', 'Home',
+  '/index.html', 'Home',
+  '/index.htm', 'Home',
   '/entry/(.*)', 'Entry',
   '/archive', 'Archive',
   '/about', 'About',
@@ -20,6 +22,7 @@ urls = (
   '/compose', 'Post',
   '/clear-cache', 'ClearCache',
   '/tag/(.*)', 'Tag',
+  '/sitemap.xml', 'SiteMap',
 )
 
 settings = {
@@ -99,7 +102,12 @@ class ClearCache:
 class Tag:
     def GET(self, tag):
         entries = data.Tag.entries_by_tag(tag)
-        return render.archive(entries=entries,**globals())
+        return render.archive(entries=entries, tagname=tag, **globals())
+
+class SiteMap:
+    def GET(self):
+        web.header('Content-Type', 'text/xml')
+        return render.sitemap(**globals())
 
 app = web.application(urls, globals())
 

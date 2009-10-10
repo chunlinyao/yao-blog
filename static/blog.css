@@ -103,9 +103,9 @@ a:hover {
   margin-left: 18px;
 }
 
-#header a {
+#header a { 
 	color: white;
-  text-decoration: none;
+	text-decoration: none;
 }
 
 #header a:hover {
@@ -201,4 +201,19 @@ a:hover {
 .entry #disqus_thread p,
 .entry #disqus_thread li {
   line-height: normal;
+}
+
+ul.archive {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+ul.archive li {
+    margin-bottom: 1em;
+}
+
+ul.archive .title {
+font-family: "Microsoft YaHei","WenQuanYi Zen Hei",SimHei, Helvetica, Arial, sans-serif;
+font-size: 14pt;
 }
