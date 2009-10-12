@@ -7,7 +7,7 @@ sys.path.insert(0, 'lib/lib.zip')
 import web, os
 import data
 from auth import requires_admin
-import datetime,locale
+import datetime
 from google.appengine.api import users
 
 urls = (
@@ -35,7 +35,8 @@ else:
     from gae_render import render_jinja
 
 render = render_jinja('templates')
-
+from datetimeformat import datetimeformat
+render._lookup.filters['datetimeformat'] = datetimeformat
 
 def tags_list():
     return data.Tag.taglist()

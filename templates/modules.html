@@ -7,7 +7,7 @@
             <a href="/tag/{{ t.url }}">{{t| e}}</a>
           {% endfor %}
       </div>
-      By Yao Chunlin &middot; {{ entry.published.strftime("%a %Y-%m-%d") }}
+      By Yao Chunlin &middot; {{ entry.published | datetimeformat }}
       
   </div>
   <div class="body">{{ entry.body }}</div>
