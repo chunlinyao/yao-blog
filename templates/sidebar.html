@@ -4,8 +4,12 @@
   {% block sidebar %}
     <div id="sidebar">
       <div class="section">
+	  <p><strong>站点链接</strong></p>
+	  <img src="http://chart.apis.google.com/chart?cht=qr&amp;chs=100x100&amp;chl={{web.ctx.homedomain |urlencode}}" alt="http://chart.apis.google.com/chart?cht=qr&amp;chs=96x96&amp;chl={{web.ctx.homedomain |urlencode}}"/>
+      </div>
+      <div class="section">
+	  <p><strong>标签</strong></p>
           <ul class="tags">
-		  <p><strong>标签</strong></p>
               {% for t in tags_list() %}
                 <li><a href="/tag/{{t.tagurl()}}">{{t.tag |e}}({{t.entrycount}})</a></li>
               {% endfor %}          

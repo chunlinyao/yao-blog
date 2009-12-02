@@ -1,14 +1,18 @@
 {% macro entry(entry,show_comments=False) -%}
 <div class="entry">
+  <div style="float: right;">
+	<img src="http://chart.apis.google.com/chart?cht=qr&amp;chs=74x74&amp;chl={{web.ctx.home + '/qr/' + entry.idurl() | urlencode}}" alt="http://chart.apis.google.com/chart?cht=qr&amp;chs=74x74&amp;chl={{web.ctx.home + '/qr/' + entry.idurl() | urlencode}}"/>
+  </div>
   <h1><a href="/entry/{{ entry.slugurl() }}">{{ entry.title | e }}</a></h1>
-  <div class="date">
+  <div class="info">
       <div class="tags">
           {% for t in entry.tagurls %}
             <a href="/tag/{{ t.url }}">{{t| e}}</a>
           {% endfor %}
       </div>
-      By Yao Chunlin &middot; {{ entry.published | datetimeformat }}
-      
+      <div>
+	      By Yao Chunlin &middot; {{ entry.published | datetimeformat }}
+      </div>
   </div>
   <div class="body">{{ entry.body }}</div>
   
@@ -19,7 +23,7 @@
   {% endif %}
   {% if users.get_current_user() and users.is_current_user_admin() %}
     <div class="footer">
-      <a href="/compose?key={{ entry.slugurl() }}">Edit this post</a>
+      <a href="/compose?key={{ entry.slugurl() }}">编辑</a>
     </div>
   {% endif %}
   {% if show_comments %}

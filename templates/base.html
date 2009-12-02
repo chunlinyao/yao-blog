@@ -43,12 +43,12 @@
       </div>
       <div id="content">{% block body %}{% endblock  %}</div>
       <div id="footer">
-	&copy;{{ datetime.datetime.utcnow().year }} Yao Chunlin - <a href="/about">About me</a> - <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons license</a>
+	&copy;{{ datetime.datetime.utcnow().year }} Yao Chunlin - <a href="/about">关于</a> - <a href="http://creativecommons.org/licenses/by/3.0/">Creative Commons license</a>
 	{% if users.get_current_user() %}
-	     - <a href="/compose">Compose</a>
-	     - <a href="{{ users.create_logout_url(web.ctx.fullpath.encode('utf-8')) }}">Sign out</a>
+	     - <a href="/compose">写文章</a>
+	     - <a href="{{ users.create_logout_url(web.ctx.fullpath.encode('utf-8')) }}">离开</a>
     {% else %}
-    	 - <a href="{{ users.create_login_url(web.ctx.fullpath.encode('utf-8')) }}">Sign in</a>
+    	 - <a href="{{ users.create_login_url(web.ctx.fullpath.encode('utf-8')) }}">登录</a>
 	{% endif %}
       </div>
     </div>

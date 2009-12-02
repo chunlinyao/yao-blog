@@ -15,6 +15,7 @@ urls = (
   '/index.html', 'Home',
   '/index.htm', 'Home',
   '/entry/(.*)', 'Entry',
+  '/qr/(.*)', 'QREntry',
   '/archive', 'Archive',
   '/about', 'About',
   '/feed', 'Feed',
@@ -37,6 +38,11 @@ else:
 render = render_jinja('templates')
 from datetimeformat import datetimeformat
 render._lookup.filters['datetimeformat'] = datetimeformat
+
+import urllib
+def urlencode(value):
+    return urllib.quote(value, safe='')
+render._lookup.filters['urlencode'] = urlencode
 
 def tags_list():
     return data.Tag.taglist()
@@ -74,6 +80,14 @@ class Entry:
         if entry is None:
             raise web.notfound()
         return render.entry(entry=entry,**globals())
+
+class QREntry:
+    def GET(self, id):
+        entry = data.entry_by_id(id)
+        if entry is None:
+            raise web.notfound()
+        return render.entry(entry=entry,**globals())
+
 
 class Archive:
     def GET(self):

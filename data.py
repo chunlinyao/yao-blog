@@ -26,6 +26,9 @@ class Entry(db.Model):
         
     def slugurl(self):
         return urllib.quote(self.slug.encode('utf-8'), safe='') 	
+
+    def idurl(self):
+        return urllib.quote(str(self.key().id()), safe='') 	
     
     def validate_tag_str(self):
         """  """
@@ -103,6 +106,9 @@ def latest_entries(limit=10):
 def entry_by_slug(slug):
     '''We're assuming all entries contain a unique slug.'''
     return db.Query(Entry).filter(u'slug =', slug).get()
+
+def entry_by_id(id):
+    return Entry.get_by_id(long(id))
 
 def exists_entry(slug):
     q = db.Query(Entry).filter(u'slug =', slug).get()

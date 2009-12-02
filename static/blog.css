@@ -123,6 +123,7 @@ a:hover {
 #sidebar {
   float: right;
   line-height: 0;
+  width: 15%;
 }
 
 #sidebar .section {
@@ -138,7 +139,7 @@ a:hover {
 }
 
 #entries {
-  margin-right: 250px;
+  margin-right: 20%;
 }
 
 #content h1 {
@@ -159,17 +160,24 @@ a:hover {
 
 .entry {
   margin-bottom: 2em;
+  border: 1px solid transparent;
 }
-
-.entry .date {
+/*
+.entry:hover {
+  border: 1px solid #CCC;
+}
+*/
+.entry .info {
   margin-top: 3px;
+  height: 100%;
+  overflow: hidden;
 }
 
-.entry .date .tags{
+.entry .info .tags{
   float: right;
 }
 
-.entry .date .tags a{
+.entry .info .tags a{
   border-left: 1em solid #FF4C1C;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -192,6 +200,9 @@ a:hover {
 #content p {
   margin: 0;
   margin-bottom: 1em;
+}
+
+#entries p {
   text-indent: 2em;
 }
 
