@@ -120,6 +120,10 @@ a:hover {
   max-width: 90%;
 }
 
+#footer {
+  clear:both;
+}
+
 #sidebar {
   float: right;
   line-height: 0;
@@ -191,6 +195,10 @@ a:hover {
 
 .entry .footer {
   margin-top: 1em;
+}
+
+#comment {
+  float:left;
 }
 
 #content p,
